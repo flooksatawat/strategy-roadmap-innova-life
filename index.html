@@ -843,6 +843,16 @@ section{padding:64px 0}
   animation:saleAvatarPulse 2.8s ease-in-out infinite;
 }
 .sale-avatar-caption{color:#5B6B80;font-size:.95rem}
+.sale-live-status{
+  margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+  background:#E8FFF5;border:1px solid rgba(16,185,129,.25);
+  color:#047857;border-radius:999px;padding:8px 13px;
+  font-weight:800;font-size:.88rem;
+}
+.sale-live-status::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#34D399;
+  box-shadow:0 0 0 5px rgba(52,211,153,.14);
+}
 .sale-control-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
 .sale-demo-btn{
   border:1px solid rgba(14,131,199,.28);background:#fff;color:#0B83C7;
@@ -856,6 +866,30 @@ section{padding:64px 0}
 .sale-matrix-title{text-align:center;color:var(--deep);font-size:1.05rem;margin-bottom:24px}
 .sale-matrix-title b{font-family:'Chakra Petch',sans-serif;color:var(--deep)}
 .sale-matrix-title .bonus{color:#F0A63C;font-weight:800}
+.sale-matrix-invest{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;
+  max-width:620px;margin:0 auto 22px;
+}
+.sale-invest-item{
+  background:#F4FBFF;border:1px solid rgba(14,165,233,.2);border-radius:14px;
+  padding:14px;text-align:center;
+}
+.sale-invest-item small{display:block;color:#64748B;font-size:.78rem;margin-bottom:4px}
+.sale-invest-item b{font-family:'Chakra Petch',sans-serif;color:#0B83C7;font-size:1.5rem}
+.sale-invest-item.get b{color:#F0A63C}
+.sale-invest-arrow{font-weight:900;color:#0B83C7}
+.sale-rebirth-row,.sale-comm-rows{display:grid;gap:10px;margin:0 auto 22px;max-width:760px}
+.sale-rebirth-row{grid-template-columns:repeat(3,1fr)}
+.sale-rebirth-item,.sale-comm-row{
+  background:#F8FBFF;border:1px solid var(--line);border-radius:12px;padding:12px;
+  color:#33556E;font-size:.9rem;
+}
+.sale-rebirth-item{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700}
+.sale-rebirth-item b,.sale-comm-row b{color:var(--deep)}
+.sale-comm-title{text-align:center;font-weight:800;color:var(--deep);margin:4px 0 10px}
+.sale-comm-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;align-items:center}
+.sale-comm-row .total{font-weight:900;color:#0B83C7;text-align:right}
+.sale-comm-row .muted{color:#94A3B8}
 .sale-matrix-row{
   display:grid;grid-template-columns:minmax(150px,1fr) 36px repeat(3,minmax(140px,1fr));
   gap:12px;align-items:stretch;margin-bottom:22px;
@@ -920,9 +954,11 @@ section{padding:64px 0}
 }
 .sale-rebuy-note{text-align:center;color:var(--muted);font-size:.9rem;margin-top:16px}
 @media(max-width:900px){
-  .sale-overview-top,.sale-matrix-row{grid-template-columns:1fr}
+  .sale-overview-top,.sale-matrix-row,.sale-matrix-invest,.sale-rebirth-row,.sale-comm-row{grid-template-columns:1fr}
   .sale-plus{display:none}
   .sale-rebuy-steps{grid-template-columns:repeat(2,1fr)}
+  .sale-invest-arrow{display:none}
+  .sale-comm-row .total{text-align:left}
 }
 @media(max-width:560px){
   .sale-demo-shell{padding:16px}
@@ -1664,6 +1700,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           <div class="sale-avatar">👤</div>
           <div class="sale-avatar-caption">ภาพรวมหน้า Sale Page สำหรับสมาชิกใหม่: เห็นจำนวนสมาชิก ค่าแนะนำ และปุ่มถอนรายได้ในแผงเดียว</div>
         </div>
+        <div class="sale-live-status">ได้สิทธิแนะนำ รับรายได้ 350 บาท/คน</div>
         <div class="sale-control-row">
           <button class="sale-demo-btn primary" id="saleAddMemberBtn" type="button">+ เพิ่มสมาชิก</button>
           <button class="sale-demo-btn" id="saleAutoBtn" type="button">▶ เล่นอัตโนมัติ</button>
@@ -1674,6 +1711,37 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
 
       <div class="sale-matrix-card">
         <div class="sale-matrix-title"><b>Matrix Bonus</b> ครบ 3 ช่อง รับโบนัสทันที <span class="bonus">฿1,500</span></div>
+        <div class="sale-matrix-invest">
+          <div class="sale-invest-item">
+            <small>ลงทุนครั้งเดียว</small>
+            <b>฿1,000</b>
+          </div>
+          <div class="sale-invest-arrow">→</div>
+          <div class="sale-invest-item get">
+            <small>เมื่อถึงคิวได้รับ</small>
+            <b>฿1,500</b>
+          </div>
+        </div>
+        <div class="sale-rebirth-row">
+          <div class="sale-rebirth-item"><span>💰</span><span>โบนัสสด <b>฿500</b></span></div>
+          <div class="sale-rebirth-item"><span>📦</span><span>สินค้า <b>฿1,000</b></span></div>
+          <div class="sale-rebirth-item"><span>♻️</span><span>เกิดใหม่ <b>อัตโนมัติ</b></span></div>
+        </div>
+        <div class="sale-comm-title">รายได้เมื่อทีมเกิดใหม่</div>
+        <div class="sale-comm-rows">
+          <div class="sale-comm-row">
+            <span>ชั้น 1</span>
+            <span>×10 คน</span>
+            <span>฿350/คน</span>
+            <span class="total">= ฿3,500</span>
+          </div>
+          <div class="sale-comm-row">
+            <span>ชั้น 2–8</span>
+            <span>×10ⁿ คน</span>
+            <span>฿10/คน</span>
+            <span class="total muted">สะสม</span>
+          </div>
+        </div>
         <div class="sale-matrix-row">
           <div class="sale-slot you">
             <span class="sale-face">🧑</span>
@@ -2561,14 +2629,14 @@ if(saleRoot){
     saleFilled+=1;
     const active=saleFilled-1;
     saleMemberCount.textContent=saleMembers.toLocaleString('th-TH');
-    saleReferralIncome.textContent=baht(saleFilled*500);
+    saleReferralIncome.textContent=baht(saleMembers*350);
     saleWaitingCount.textContent=(217+saleMembers).toLocaleString('th-TH')+' คน';
     saleBonusLabel.textContent=saleFilled<3?'รอรับโบนัส':'กำลังจ่ายโบนัส';
     saleBonusBanner.classList.remove('is-complete');
     paintSaleSlots(active);
     bump(saleMemberStat);
     bump(saleReferralStat);
-    setSaleText(`สมาชิกคนที่ ${saleMembers.toLocaleString('th-TH')} เข้าระบบ → เติมช่องที่ ${saleFilled}/3 และสะสมค่าแนะนำ ${baht(saleFilled*500)}`);
+    setSaleText(`สมาชิกคนที่ ${saleMembers.toLocaleString('th-TH')} เข้าระบบ → เติมช่องที่ ${saleFilled}/3 และสะสมค่าแนะนำ ${baht(saleMembers*350)} (350 บาท/คน)`);
     if(saleFilled===3) completeSaleCycle();
   }
 
