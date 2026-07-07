@@ -96,8 +96,9 @@ section{padding:64px 0}
   mask-image:radial-gradient(600px 400px at 80% 20%,#000 30%,transparent 75%);
 }
 .model-shift{
-  grid-column:2;grid-row:2 / span 4;
-  display:flex;flex-direction:column;align-items:stretch;gap:14px;margin-top:0;max-width:none;flex-wrap:nowrap;
+  grid-column:1/-1;
+  display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:stretch;gap:14px;margin-top:4px;max-width:none;
 }
 .shift-col{
   flex:1;min-width:0;border-radius:14px;padding:18px 20px;
@@ -118,7 +119,7 @@ section{padding:64px 0}
 .shift-col.new li::before{content:"✓";position:absolute;left:0;color:#6FE3B4;font-weight:700}
 .shift-arrow{
   align-self:center;font-size:1.4rem;color:var(--gold);font-family:'Chakra Petch',sans-serif;
-  padding:0 2px;transform:rotate(90deg);
+  padding:0 2px;transform:none;
 }
 .key-message{
   grid-column:1/-1;width:100%;display:block;
@@ -137,13 +138,16 @@ section{padding:64px 0}
   .hero p.lead{margin-top:18px}
   .lead-list{margin-top:16px}
   .key-message{margin-top:26px}
-  .model-shift{display:flex;flex-direction:row;flex-wrap:wrap;margin-top:32px;max-width:720px}
+  .model-shift{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);margin-top:22px;max-width:none}
   .shift-col{min-width:220px}
   .shift-arrow{transform:none}
   .hero-stats{display:flex;flex-wrap:wrap;margin-top:38px}
   .stat{min-width:150px}
 }
-@media(max-width:640px){.shift-arrow{transform:rotate(90deg);margin:2px auto}}
+@media(max-width:640px){
+  .model-shift{grid-template-columns:1fr}
+  .shift-arrow{transform:rotate(90deg);margin:2px auto}
+}
 .hero-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:6px}
 .key-message{
   margin-top:26px;display:inline-block;
@@ -764,6 +768,35 @@ section{padding:64px 0}
   padding:16px 18px;font-size:.9rem;color:var(--muted);line-height:1.55;
 }
 .oc-item b{display:block;color:var(--deep);margin-bottom:4px}
+.content-workshop{
+  background:linear-gradient(135deg,rgba(30,158,111,.12),rgba(62,143,216,.12));
+  border:1.5px solid rgba(30,158,111,.35);border-radius:var(--radius);
+  padding:24px 26px;margin:0 0 24px;
+}
+.cw-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:18px}
+.cw-kicker{
+  font-family:'Chakra Petch',sans-serif;font-weight:800;font-size:.78rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--jade);display:block;margin-bottom:5px;
+}
+.cw-head h3{font-size:1.18rem;color:var(--deep);margin-bottom:4px}
+.cw-head p{color:var(--muted);font-size:.92rem;max-width:720px}
+.cw-pill{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  color:var(--deep);font-weight:800;padding:8px 16px;white-space:nowrap;
+}
+.cw-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cw-step{
+  background:rgba(255,255,255,.82);border:1px solid rgba(188,216,235,.85);
+  border-radius:14px;padding:16px;min-height:132px;
+}
+.cw-num{
+  width:34px;height:34px;border-radius:10px;background:var(--jade);color:#fff;
+  display:grid;place-items:center;font-family:'Chakra Petch',sans-serif;font-weight:800;margin-bottom:10px;
+}
+.cw-step h4{color:var(--deep);font-size:1rem;margin-bottom:6px}
+.cw-step p{color:var(--muted);font-size:.86rem;line-height:1.55}
+@media(max-width:900px){.cw-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.cw-grid{grid-template-columns:1fr}.cw-pill{white-space:normal}}
 
 /* ---------- SALE PAGE SYSTEM ---------- */
 .sale-page-sec{background:linear-gradient(180deg,#EAF7FF 0%,var(--paper) 100%)}
@@ -782,17 +815,18 @@ section{padding:64px 0}
 }
 .sale-mini-stat{
   background:#DFF0FA;border-radius:4px;padding:18px;color:#27617F;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
 .sale-mini-stat small{display:block;font-size:.85rem;margin-bottom:3px}
 .sale-mini-stat b{font-family:'Chakra Petch',sans-serif;font-size:1.55rem;color:#0B83C7;line-height:1}
+.sale-mini-stat.is-pop{transform:translateY(-4px);background:#D6F7EC;box-shadow:0 12px 24px rgba(14,165,233,.14)}
 .sale-withdraw{
   display:flex;align-items:center;justify-content:center;gap:12px;text-align:left;
   background:#076044;color:#fff;border-radius:14px;padding:18px 22px;
   box-shadow:0 4px 12px rgba(6,96,68,.24);
-  position:relative;overflow:hidden;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;
+  position:relative;overflow:hidden;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease;
 }
-.sale-withdraw:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(6,96,68,.28)}
-.sale-withdraw:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.sale-withdraw:hover,.sale-withdraw.is-active{transform:translateY(-3px);box-shadow:0 12px 28px rgba(6,96,68,.28)}
 .sale-withdraw::after{
   content:"";position:absolute;inset:0 auto 0 -70%;width:55%;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.2),transparent);
@@ -809,19 +843,16 @@ section{padding:64px 0}
   animation:saleAvatarPulse 2.8s ease-in-out infinite;
 }
 .sale-avatar-caption{color:#5B6B80;font-size:.95rem}
-.sale-demo-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.sale-control-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
 .sale-demo-btn{
-  border:1px solid rgba(14,131,199,.25);border-radius:999px;padding:10px 16px;
-  font-family:'Chakra Petch',sans-serif;font-weight:700;background:#fff;color:#0B83C7;
-  cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  border:1px solid rgba(14,131,199,.28);background:#fff;color:#0B83C7;
+  border-radius:999px;padding:9px 16px;font-weight:800;cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.sale-demo-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,131,199,.16)}
-.sale-demo-btn.primary{background:linear-gradient(135deg,#0EA5E9,#35D399);color:#fff;border-color:transparent}
-.sale-demo-btn.ghost{background:transparent;color:#5B6B80}
-.sale-narration{
-  margin-top:12px;background:#F0F9FF;border:1px solid rgba(14,165,233,.18);
-  border-radius:12px;padding:12px 14px;color:#456275;font-size:.9rem;line-height:1.55
-}
+.sale-demo-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(14,131,199,.16)}
+.sale-demo-btn.primary{background:#0B83C7;color:#fff;border-color:#0B83C7}
+.sale-demo-btn.danger{color:#7C2D12;border-color:#FDBA74}
+.sale-narration{flex:1;min-width:260px;color:#52677E;font-size:.9rem}
 .sale-matrix-title{text-align:center;color:var(--deep);font-size:1.05rem;margin-bottom:24px}
 .sale-matrix-title b{font-family:'Chakra Petch',sans-serif;color:var(--deep)}
 .sale-matrix-title .bonus{color:#F0A63C;font-weight:800}
@@ -835,7 +866,10 @@ section{padding:64px 0}
   border:1.5px solid rgba(118,199,234,.65);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:12px;text-align:center;color:#0C3755;
   transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
+  cursor:pointer;user-select:none;
 }
+.sale-slot:hover{transform:translateY(-5px);box-shadow:0 16px 30px rgba(14,165,233,.16)}
+.sale-slot:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 .sale-slot.you{
   background:linear-gradient(160deg,rgba(6,95,70,.65),rgba(38,166,145,.45));
   border:2px solid rgba(52,211,153,.7);box-shadow:0 0 0 6px rgba(52,211,153,.12);
@@ -860,9 +894,9 @@ section{padding:64px 0}
 .sale-bonus-banner{
   display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
   background:linear-gradient(135deg,#263E59,#66C9EE);color:#fff;border:1.5px solid rgba(240,166,60,.65);
-  border-radius:18px;padding:24px;margin-bottom:24px;
+  border-radius:18px;padding:24px;margin-bottom:24px;transition:transform .3s ease, box-shadow .3s ease;
 }
-.sale-bonus-banner.is-complete{background:linear-gradient(135deg,#065F46,#42C9A0);box-shadow:0 16px 32px rgba(6,95,70,.2)}
+.sale-bonus-banner.is-complete{transform:translateY(-4px);box-shadow:0 18px 36px rgba(240,166,60,.26)}
 .sale-live-dot{width:9px;height:9px;border-radius:50%;background:#45E6A4;box-shadow:0 0 0 5px rgba(69,230,164,.18)}
 .sale-bonus-label{font-size:1.15rem;font-weight:800}
 .sale-bonus-amount{font-family:'Chakra Petch',sans-serif;font-size:2.4rem;font-weight:800;color:#FDE047}
@@ -984,55 +1018,9 @@ section{padding:64px 0}
 }
 .audit-card:nth-child(2n){border-left-color:var(--jade)}
 .audit-card:nth-child(3n){border-left-color:var(--gold)}
-.audit-card h3,.audit-card h4{font-size:1rem;color:var(--deep);margin-bottom:8px}
+.audit-card h4{font-size:1rem;color:var(--deep);margin-bottom:8px}
 .audit-card p{font-size:.9rem;color:var(--muted);line-height:1.58}
 .audit-card b{color:var(--deep)}
-.site-label{font-weight:700;color:var(--deep)}
-
-/* ---------- INVITE KEYWORDS ---------- */
-.invite-sec{background:linear-gradient(180deg,var(--paper) 0%,#EFF9F3 100%)}
-.invite-panel{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:28px;box-shadow:0 16px 35px rgba(15,59,92,.07)
-}
-.invite-hero{
-  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
-  gap:22px;align-items:stretch;margin-bottom:22px
-}
-.invite-main{
-  background:linear-gradient(135deg,#0F3B5C,#166A61);
-  color:#fff;border-radius:18px;padding:24px
-}
-.invite-main h3{
-  font-size:clamp(1.4rem,3vw,2.35rem);line-height:1.15;margin-bottom:10px;
-  color:#fff
-}
-.invite-main p{color:#DDF7EC;line-height:1.65;font-size:1rem}
-.invite-commission{
-  border:2px solid var(--gold);border-radius:18px;padding:22px;
-  background:linear-gradient(135deg,#FFF7E8,#FFFFFF)
-}
-.invite-commission .big{font-family:'Chakra Petch',sans-serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1}
-.invite-commission p{color:var(--muted);line-height:1.55;margin-top:10px}
-.invite-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.invite-card{
-  background:#F8FBFF;border:1px solid var(--line);border-radius:14px;padding:18px;
-  min-height:140px
-}
-.invite-card b{display:block;color:var(--deep);font-size:1.02rem;margin-bottom:8px}
-.invite-card p{color:var(--muted);font-size:.92rem;line-height:1.58}
-.invite-card.gold{background:#FFF8EA;border-color:#F4CF92}
-.invite-card.jade{background:#EFFFF6;border-color:#9EE4C3}
-.invite-script{
-  margin-top:18px;background:#0F3B5C;color:#fff;border-radius:16px;padding:18px 20px;
-  display:flex;gap:14px;align-items:flex-start
-}
-.invite-script span{font-size:1.35rem}
-.invite-script p{line-height:1.65;color:#EAF6FF}
-@media(max-width:860px){
-  .invite-hero,.invite-grid{grid-template-columns:1fr}
-  .invite-main,.invite-commission{padding:20px}
-}
 .audit-note{
   margin-top:18px;padding:16px 18px;background:var(--gold-soft);
   border:1px solid rgba(240,166,60,.55);border-radius:14px;color:#7A4C05;font-size:.9rem;
@@ -1244,18 +1232,6 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
       <div class="brand-tag">INNOVA CONNECT</div>
     </div>
     <h1>สร้าง<span class="hl">พาร์ทเนอร์ธุรกิจยุค AI</span> ไม่ใช่เครือข่ายขายตรงแบบเดิม</h1>
-    <p class="lead">โมเดลธุรกิจที่เน้นการพัฒนาคน</p>
-    <ul class="lead-list">
-      <li>📚 ห้องเรียนออนไลน์ อัพเดททุกสัปดาห์</li>
-      <li>🎤 วิทยากรพิเศษ ทุกเดือน</li>
-      <li>🤝 ระบบพาร์ทเนอร์ ช่วยกันทั้งองค์กร</li>
-      <li>🎯 เป้าหมายร่วม XXX พาร์ทเนอร์</li>
-      <li>🎁 รางวัลปลายทาง — ทริปสัมผัสเมือง AI ล้ำสมัยที่ประเทศจีน</li>
-    </ul>
-    <div class="key-message">
-      <span class="km-label">เพราะเราเชื่อว่า</span>
-      <div class="km-text">💰 รายได้ในกระเป๋า <span class="km-eq">=</span> 📖 ความรู้ที่เรามี</div>
-    </div>
     <div class="model-shift">
       <div class="shift-col old">
         <span class="shift-tag">โมเดลเดิม</span>
@@ -1274,6 +1250,18 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           <li>ทักษะ AI และธุรกิจที่ใช้ได้จริงทุกสายงาน</li>
         </ul>
       </div>
+    </div>
+    <p class="lead">โมเดลธุรกิจที่เน้นการพัฒนาคน</p>
+    <ul class="lead-list">
+      <li>📚 ห้องเรียนออนไลน์ อัพเดททุกสัปดาห์</li>
+      <li>🎤 วิทยากรพิเศษ ทุกเดือน</li>
+      <li>🤝 ระบบพาร์ทเนอร์ ช่วยกันทั้งองค์กร</li>
+      <li>🎯 เป้าหมายร่วม XXX พาร์ทเนอร์</li>
+      <li>🎁 รางวัลปลายทาง — ทริปสัมผัสเมือง AI ล้ำสมัยที่ประเทศจีน</li>
+    </ul>
+    <div class="key-message">
+      <span class="km-label">เพราะเราเชื่อว่า</span>
+      <div class="km-text">💰 รายได้ในกระเป๋า <span class="km-eq">=</span> 📖 ความรู้ที่เรามี</div>
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="num gold" id="counter">XXX</div><div class="lbl">เป้าหมายพาร์ทเนอร์ในระบบ (คน)</div></div>
@@ -1319,7 +1307,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
   <div class="wrap">
     <div class="eyebrow">Business Engine</div>
     <h2 class="sec-title">3 แกนหลักขับเคลื่อนธุรกิจ</h2>
-    <p class="sec-sub">โมเดลธุรกิจแบบแพลตฟอร์ม — บริษัทไม่มีสินค้าเอง แต่เชื่อมผู้ประกอบการกับพาร์ทเนอร์ธุรกิจเข้าด้วยกัน ทุกฝ่ายได้ประโยชน์ · กดที่มุมสามเหลี่ยมหรือการ์ดเพื่อดูรายละเอียด</p>
+    <p class="sec-sub">โมเดลธุรกิจแบบแพลตฟอร์ม — บริษัทไม่มีสินค้าเอง แต่เชื่อมผู้ประกอบการกับสมาชิกเข้าด้วยกัน ทุกฝ่ายได้ประโยชน์ · กดที่มุมสามเหลี่ยมหรือการ์ดเพื่อดูรายละเอียด</p>
 
     <div class="engine-layout">
       <div class="tri-wrap">
@@ -1339,10 +1327,10 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             <text x="60" y="285" text-anchor="middle" class="tn-icon">📦</text>
             <text x="60" y="310" text-anchor="middle" class="tn-label">สินค้า</text>
           </g>
-          <g class="tri-node" data-axis="2" tabindex="0" role="button" aria-label="พาร์ทเนอร์ธุรกิจ แนะนำบอกต่อ">
+          <g class="tri-node" data-axis="2" tabindex="0" role="button" aria-label="สมาชิก แนะนำบอกต่อ">
             <circle cx="340" cy="290" r="42"/>
             <text x="340" y="285" text-anchor="middle" class="tn-icon">👥</text>
-            <text x="340" y="310" text-anchor="middle" class="tn-label">พาร์ทเนอร์</text>
+            <text x="340" y="310" text-anchor="middle" class="tn-label">สมาชิก</text>
           </g>
           <text x="200" y="205" text-anchor="middle" class="tri-center">คุณค่าหมุนเวียน<tspan x="200" dy="22">ทุกฝ่ายได้ประโยชน์</tspan></text>
         </svg>
@@ -1364,7 +1352,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           <span class="ax-num">2</span>
           <div>
             <h3>📦 สินค้า — จากผู้ประกอบการ ไม่มีสินค้าเอง</h3>
-            <p>บริษัทไม่ผลิตและไม่สต๊อกสินค้าเอง แต่คัดสรรสินค้าและบริการที่ดีจากผู้ประกอบการตัวจริง — ผู้ประกอบการได้ช่องทางเข้าถึงลูกค้า พาร์ทเนอร์ธุรกิจได้ของดีมีคุณภาพ Win-Win ทุกฝ่าย</p>
+            <p>บริษัทไม่ผลิตและไม่สต๊อกสินค้าเอง แต่คัดสรรสินค้าและบริการที่ดีจากผู้ประกอบการตัวจริง — ผู้ประกอบการได้ช่องทางเข้าถึงลูกค้า สมาชิกได้ของดีมีคุณภาพ Win-Win ทุกฝ่าย</p>
             <ul class="ax-sub">
               <li>💻 รองรับ <b>ดิจิทัลโปรดักต์</b> — สอนวิธีสร้างสินค้าดิจิทัล (คอร์สเรียน, เทมเพลต, เครื่องมือดิจิทัล) แล้วนำมาวางขายบนแพลตฟอร์มได้จริง</li>
               <li>🎓 สอนสร้างสินค้าดิจิทัลเฉพาะทาง: <b>E-Book · E-Learning · Software</b> ตั้งแต่ไอเดียจนถึงพร้อมขายจริง</li>
@@ -1377,12 +1365,13 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
         <button class="axis-card" data-axis="2" type="button">
           <span class="ax-num">3</span>
           <div>
-            <h3>👥 พาร์ทเนอร์ธุรกิจ — แนะนำบอกต่อ เชื่อมต่อคน</h3>
+            <h3>👥 สมาชิก — แนะนำบอกต่อ เชื่อมต่อคน</h3>
             <p>ไม่ต้องสต๊อกของ ไม่ต้องขายแบบกดดัน แค่แนะนำสิ่งดีๆ ให้คนที่ใช่ และเชื่อมต่อคนเข้าหากัน — ทุกการบอกต่อคือการสร้างคุณค่า และสร้างรายได้ที่ยั่งยืน</p>
           </div>
         </button>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1513,34 +1502,6 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
         </div>
       </div>
     </div>
-
-    <div class="pillar-add">
-      <button class="add-topic-btn" id="btnAddTopic" type="button">+ เพิ่มหัวข้อใหม่</button>
-      <form class="topic-form" id="topicForm" hidden>
-        <div class="tf-grid">
-          <div class="tf-field">
-            <label for="topicTitle">หัวข้อ</label>
-            <input id="topicTitle" type="text" placeholder="เช่น ระบบอบรมพาร์ทเนอร์ใหม่">
-          </div>
-          <div class="tf-field">
-            <label for="topicBadge">ป้ายกำกับ</label>
-            <input id="topicBadge" type="text" placeholder="เช่น ใช้งานได้ทันที">
-          </div>
-          <div class="tf-field full">
-            <label for="topicDesc">คำอธิบาย</label>
-            <textarea id="topicDesc" placeholder="สรุปแนวคิดของหัวข้อนี้"></textarea>
-          </div>
-          <div class="tf-field full">
-            <label for="topicBullets">รายการย่อย</label>
-            <textarea id="topicBullets" placeholder="ใส่ทีละบรรทัด เช่น&#10;ขั้นตอนที่ 1&#10;ขั้นตอนที่ 2"></textarea>
-          </div>
-        </div>
-        <div class="tf-actions">
-          <button class="tf-cancel" id="topicCancel" type="button">ยกเลิก</button>
-          <button class="tf-save" type="submit">บันทึกและสร้างหัวข้อใหม่</button>
-        </div>
-      </form>
-    </div>
   </div>
 </section>
 
@@ -1616,6 +1577,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             <td>
               <ul class="wp-list">
                 <li>อีเวนต์วิทยากรพิเศษรับเชิญ 1 ครั้ง (Hybrid)</li>
+                <li>เวิร์กช็อปโปรโมทบริษัทและชวนสมาชิกใหม่: สอนสร้างคอนเทนต์ด้วย AI</li>
                 <li>ประกาศรางวัล "พาร์ทเนอร์สร้างคุณค่าแห่งเดือน"</li>
                 <li>รายงานความคืบหน้าสู่ XXX พาร์ทเนอร์</li>
               </ul>
@@ -1624,6 +1586,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             <td>
               <ul class="wp-list kpi-list">
                 <li>ผู้เข้าร่วมอีเวนต์ ≥ 60%</li>
+                <li>พาร์ทเนอร์ส่งผลงานคอนเทนต์ AI อย่างน้อย 1 ชุด</li>
                 <li>พาร์ทเนอร์ใหม่ตามเป้ารายเดือน</li>
                 <li>บันทึกวิดีโอเข้าคลัง 100%</li>
               </ul>
@@ -1675,134 +1638,80 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
 <section class="sale-page-sec" id="sale-page" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow">Sale Page System</div>
-    <h2 class="sec-title">Sale Page — สมัครพาร์ทเนอร์ธุรกิจ แนะนำ ถอนรายได้ และ Re-Buy ในหน้าเดียว</h2>
-    <p class="sec-sub">ส่วนนี้เขียนโค้ดฝังไว้ในระบบโดยตรง เพื่อแสดงประสบการณ์ Sale Page ที่พาร์ทเนอร์ธุรกิจเห็น ไม่ใช่การแปะลิงก์ออกไปภายนอก</p>
+    <h2 class="sec-title">Sale Page — สมัคร แนะนำ ถอนรายได้ และ Re-Buy ในหน้าเดียว</h2>
+    <p class="sec-sub">ส่วนนี้เขียนโค้ดฝังไว้ในระบบโดยตรง เพื่อแสดงประสบการณ์ Sale Page ที่สมาชิกเห็น ไม่ใช่การแปะลิงก์ออกไปภายนอก</p>
 
-    <div class="sale-demo-shell" id="saleInteractive">
+    <div class="sale-demo-shell">
       <div class="sale-overview-card">
         <div class="sale-overview-top">
           <div class="sale-mini-stat" id="saleMemberStat">
-            <small>พาร์ทเนอร์ธุรกิจ</small>
+            <small>สมาชิก</small>
             <b id="saleMemberCount">0</b>
           </div>
           <div class="sale-mini-stat" id="saleReferralStat">
             <small>ค่าแนะนำ</small>
             <b id="saleReferralIncome">฿0</b>
           </div>
-          <button class="sale-withdraw" id="saleWithdrawBtn" type="button">
+          <div class="sale-withdraw" id="saleWithdrawBtn" role="button" tabindex="0" aria-label="กดถอนรายได้">
             <span class="sale-withdraw-icon">💳</span>
             <div>
               <strong>กดถอนรายได้ได้ทันที</strong>
               <small>รับเงินเข้าบัญชีวันถัดไป</small>
             </div>
-          </button>
+          </div>
         </div>
         <div class="sale-avatar-row">
           <div class="sale-avatar">👤</div>
-          <div class="sale-avatar-caption">ภาพรวมหน้า Sale Page สำหรับพาร์ทเนอร์ธุรกิจใหม่: เห็นจำนวนพาร์ทเนอร์ธุรกิจ ค่าแนะนำ และปุ่มถอนรายได้ในแผงเดียว</div>
+          <div class="sale-avatar-caption">ภาพรวมหน้า Sale Page สำหรับสมาชิกใหม่: เห็นจำนวนสมาชิก ค่าแนะนำ และปุ่มถอนรายได้ในแผงเดียว</div>
         </div>
-        <div class="sale-demo-actions">
-          <button class="sale-demo-btn primary" id="saleAddMemberBtn" type="button">+ เพิ่มพาร์ทเนอร์</button>
-          <button class="sale-demo-btn" id="saleAutoBtn" type="button">เล่นอัตโนมัติ</button>
-          <button class="sale-demo-btn ghost" id="saleResetBtn" type="button">เริ่มใหม่</button>
+        <div class="sale-control-row">
+          <button class="sale-demo-btn primary" id="saleAddMemberBtn" type="button">+ เพิ่มสมาชิก</button>
+          <button class="sale-demo-btn" id="saleAutoBtn" type="button">▶ เล่นอัตโนมัติ</button>
+          <button class="sale-demo-btn danger" id="saleResetBtn" type="button">↺ รีเซ็ต</button>
+          <span class="sale-narration" id="saleNarration">กดเพิ่มสมาชิก หรือกดที่ช่อง Matrix เพื่อจำลองการไหลของโบนัส</span>
         </div>
-        <p class="sale-narration" id="saleNarration">กดเพิ่มพาร์ทเนอร์ธุรกิจ เพื่อดูการเคลื่อนไหวของรายได้ ค่าแนะนำ และ Metrix Bonus</p>
       </div>
 
       <div class="sale-matrix-card">
-        <div class="sale-matrix-title"><b>Metrix Bonus</b> ครบ 3 ช่อง รับโบนัสทันที <span class="bonus">฿1,500</span></div>
+        <div class="sale-matrix-title"><b>Matrix Bonus</b> ครบ 3 ช่อง รับโบนัสทันที <span class="bonus">฿1,500</span></div>
         <div class="sale-matrix-row">
           <div class="sale-slot you">
             <span class="sale-face">🧑</span>
             <span class="sale-label">คุณ</span>
           </div>
           <div class="sale-plus">+</div>
-          <div class="sale-slot empty" data-sale-slot="0">
-            <span class="sale-face">➕</span>
+          <div class="sale-slot" data-sale-slot="0" role="button" tabindex="0" aria-label="ช่องที่ 1">
+            <span class="sale-face">🧑</span>
             <span class="sale-label">ช่องที่ 1</span>
-            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
+            <span class="sale-status">มีสมาชิกแล้ว</span>
           </div>
-          <div class="sale-slot empty" data-sale-slot="1">
-            <span class="sale-face">➕</span>
+          <div class="sale-slot" data-sale-slot="1" role="button" tabindex="0" aria-label="ช่องที่ 2">
+            <span class="sale-face">🧑</span>
             <span class="sale-label">ช่องที่ 2</span>
-            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
+            <span class="sale-status">มีสมาชิกแล้ว</span>
           </div>
-          <div class="sale-slot empty" data-sale-slot="2">
+          <div class="sale-slot empty" data-sale-slot="2" role="button" tabindex="0" aria-label="ช่องที่ 3">
             <span class="sale-face">➕</span>
             <span class="sale-label">ช่องที่ 3</span>
-            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
+            <span class="sale-status waiting">รอสมาชิก</span>
           </div>
         </div>
         <div class="sale-bonus-banner" id="saleBonusBanner">
           <span class="sale-live-dot"></span>
           <span class="sale-bonus-label" id="saleBonusLabel">รอรับโบนัส</span>
           <span class="sale-bonus-amount" id="saleBonusAmount">฿1,500</span>
-          <span class="sale-wait" id="saleWaitingCount">มีพาร์ทเนอร์รอรับแล้ว <b>217 คน</b></span>
+          <span class="sale-wait">มีสมาชิกรอรับแล้ว <b id="saleWaitingCount">217 คน</b></span>
         </div>
         <div class="sale-rebuy">
           <h3>♻️ ระบบ Re-Buy หมุนเวียนรายได้</h3>
           <div class="sale-rebuy-steps">
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">1</span>รับโบนัส 1,500</div>
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">2</span>ซื้อสินค้าซ้ำ 1,000</div>
-            <div class="sale-rebuy-step"><span class="sale-rebuy-num">3</span>รักษาสถานะพาร์ทเนอร์</div>
+            <div class="sale-rebuy-step"><span class="sale-rebuy-num">3</span>รักษาสถานะสมาชิก</div>
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">4</span>500 สะสมถอนได้</div>
           </div>
-          <p class="sale-rebuy-note">วงจรหมุนต่อเนื่อง — ทุกครั้งที่เกิดพาร์ทเนอร์ธุรกิจใหม่ ทั้งสายงานได้รับรายได้ซ้ำ</p>
+          <p class="sale-rebuy-note">วงจรหมุนต่อเนื่อง — ทุกครั้งที่เกิดใหม่ ทั้งสายงานได้รับรายได้ซ้ำ</p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= INVITE KEYWORDS ================= -->
-<section class="invite-sec" id="invite-keywords" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow">Invite Keywords</div>
-    <h2 class="sec-title">คีย์เวิร์ดในการชวน — ซื้อสินค้าแล้วมีสิทธิสร้างรายได้</h2>
-    <p class="sec-sub">จัดข้อความให้พาร์ทเนอร์ธุรกิจใช้สื่อสารได้ตรง เข้าใจง่าย และไม่ต้องอธิบายซับซ้อน</p>
-
-    <div class="invite-panel">
-      <div class="invite-hero">
-        <div class="invite-main">
-          <h3>ซื้อสินค้า 1,000 บาท<br>ได้รับสิทธิสร้างรายได้</h3>
-          <p>จากการแนะนำ / บอกต่อ เหมือน Affiliate, นายหน้า หรือปักตะกร้า ไม่ต้องลงทุนเพิ่ม ไม่ต้องสต๊อกสินค้า และใช้ Sale Page เป็นเครื่องมือช่วยปิดการสมัคร</p>
-        </div>
-        <div class="invite-commission">
-          <div class="big">350 บาท</div>
-          <p><b>บริษัทจ่าย 350 บาท / คน หรือ 35%</b><br>เมื่อแนะนำพาร์ทเนอร์ธุรกิจใหม่ที่ซื้อสินค้าเข้าเงื่อนไข</p>
-        </div>
-      </div>
-
-      <div class="invite-grid">
-        <div class="invite-card">
-          <b>แนะนำครบ 10 คน</b>
-          <p>ได้รับสิทธิพิเศษเป็น <b>Partner VVIP กับ Innova Life</b> และได้ส่วนแบ่ง 1% จากยอดขายทั่วโลก</p>
-        </div>
-        <div class="invite-card jade">
-          <b>รายได้จากการบอกต่อของทีม</b>
-          <p>ทุกการบอกต่อของพาร์ทเนอร์ธุรกิจใหม่ เราจะได้รับรายได้ 1% ของพาร์ทเนอร์ธุรกิจทั้งหมดด้วย</p>
-        </div>
-        <div class="invite-card gold">
-          <b>Metrix Bonus</b>
-          <p>เมื่อมีพาร์ทเนอร์ธุรกิจในแผนโบนัสครบ 3 คน บริษัทจ่ายโบนัสให้ผู้ที่เข้าเงื่อนไขทันที</p>
-        </div>
-        <div class="invite-card">
-          <b>โบนัส + สิทธิซื้อซ้ำ</b>
-          <p>เมื่อเข้ามาเป็นพาร์ทเนอร์ธุรกิจ จะได้รับโบนัสจากบริษัทเมื่อมีพาร์ทเนอร์ธุรกิจมากขึ้น และได้รับสิทธิซื้อสินค้าซ้ำ</p>
-        </div>
-        <div class="invite-card jade">
-          <b>ไม่ต้องสต๊อกสินค้า</b>
-          <p>ไม่ต้องลงทุนเพิ่ม ไม่ต้องเก็บสินค้าเอง ใช้ระบบบริษัทและคอนเทนต์ AI ช่วยสื่อสารแทน</p>
-        </div>
-        <div class="invite-card gold">
-          <b>โบนัสเพิ่ม 500</b>
-          <p>หลังซื้อสินค้าซ้ำ 1,000 บาทในระบบ Re-Buy จะเหลือ 500 บาทสะสมถอนได้ตามเงื่อนไข</p>
-        </div>
-      </div>
-
-      <div class="invite-script">
-        <span>💬</span>
-        <p><b>ประโยคชวนสั้น:</b> ซื้อสินค้า 1,000 บาท แล้วได้สิทธิสร้างรายได้จากการแนะนำ เหมือน Affiliate / นายหน้า / ปักตะกร้า บริษัทจ่าย 350 บาทต่อคน และถ้าขยายครบตามเงื่อนไขยังมี Metrix Bonus กับสิทธิ Partner VVIP เพิ่มอีก</p>
       </div>
     </div>
   </div>
@@ -1888,7 +1797,52 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             </div>
           </div>
         </div>
-        <div class="shelf-note">แนวทางใหม่: ลดความหนาแน่นของกริดเดิม เพิ่มตัวกรอง หมวดสินค้า และการ์ดที่อ่านง่ายขึ้น เพื่อช่วยให้พาร์ทเนอร์ธุรกิจเลือกสินค้าได้เร็วขึ้น</div>
+        <div class="shelf-note">แนวทางใหม่: ลดความหนาแน่นของกริดเดิม เพิ่มตัวกรอง หมวดสินค้า และการ์ดที่อ่านง่ายขึ้น เพื่อช่วยให้สมาชิกเลือกสินค้าได้เร็วขึ้น</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WEBSITE LINK / AUDIT ================= -->
+<section class="site-audit-sec" id="website-audit" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Website Link & Audit</div>
+    <h2 class="sec-title">แนบลิงก์เว็บไซต์ Innova Life และจุดที่ต้องแก้ไข</h2>
+    <p class="sec-sub">ใช้เว็บไซต์หลักเป็นฐานเชื่อม Sale Page, สินค้า, CRM และกิจกรรม ให้ประสบการณ์ออนไลน์สื่อสารเรื่องเดียวกันทั้งระบบ</p>
+
+    <div class="site-link-card">
+      <div>
+        <span class="site-label">Official Website</span>
+        <h3>innova-life.com</h3>
+        <p>ลิงก์นี้ควรเป็นจุดเริ่มต้นของลูกค้าและสมาชิกใหม่ ก่อนต่อไปยัง Sale Page, LINE OA และ Innova CRM</p>
+      </div>
+      <a class="site-url" href="https://innova-life.com/" target="_blank" rel="noopener">เปิดเว็บไซต์ Innova Life ↗</a>
+    </div>
+
+    <div class="audit-grid">
+      <div class="audit-card">
+        <h3>1. Brand Message</h3>
+        <p>ปรับข้อความหลักให้ชัดว่า Innova Life คือแพลตฟอร์มพาร์ทเนอร์ยุค AI ไม่ใช่แค่เว็บสินค้า Wellness</p>
+      </div>
+      <div class="audit-card">
+        <h3>2. Product Shelf</h3>
+        <p>เพิ่มหัวข้อสินค้าทั้งหมด ตัวกรองหมวดสินค้า สินค้าแนะนำ และข้อมูลสินค้าให้ตัดสินใจง่ายขึ้น</p>
+      </div>
+      <div class="audit-card">
+        <h3>3. Sale Page Flow</h3>
+        <p>ฝังระบบสมัคร แนะนำ ถอนรายได้ Matrix Bonus และ Re-Buy ให้เห็นเป็นประสบการณ์เดียว ไม่พาออกหลายลิงก์</p>
+      </div>
+      <div class="audit-card">
+        <h3>4. Trust & Compliance</h3>
+        <p>เพิ่มข้อมูลมาตรฐานสินค้า เลขจดแจ้ง เงื่อนไขรายได้ นโยบายคืนสินค้า และข้อจำกัดการกล่าวอ้างให้ครบ</p>
+      </div>
+      <div class="audit-card">
+        <h3>5. SEO / Social</h3>
+        <p>ปรับ Title, Description, OG Image และโครงสร้างบทความไทย เพื่อให้แชร์แล้วเข้าใจข้อเสนอทันที</p>
+      </div>
+      <div class="audit-card">
+        <h3>6. Innova CRM</h3>
+        <p>เชื่อมข้อมูลสมาชิก ลูกค้า ยอดขาย กิจกรรม และการติดตามผล ให้ทีมเห็นสถานะเดียวกันแบบเรียลไทม์</p>
       </div>
     </div>
   </div>
@@ -2107,6 +2061,39 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           <li>เปิดตัวหลักสูตร AI และเครื่องมือดิจิทัลที่พาร์ทเนอร์ใช้ทำงานได้ทันที</li>
           <li>สรุปรายชื่อพาร์ทเนอร์แกนหลัก Mentor Partner และแผนกิจกรรม 4 ภาค</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="content-workshop">
+      <div class="cw-head">
+        <div>
+          <span class="cw-kicker">Activity Topic</span>
+          <h3>กิจกรรมโปรโมทบริษัทและชวนสมาชิกใหม่</h3>
+          <p>จัดเป็นเวิร์กช็อปให้พาร์ทเนอร์ลงมือทำจริงในงาน เพื่อสร้างสื่อพร้อมใช้สำหรับสื่อสารโมเดล Innova Life และดึงสมาชิกใหม่เข้าสู่ระบบ</p>
+        </div>
+        <div class="cw-pill">สอนสร้างคอนเทนต์ด้วย AI</div>
+      </div>
+      <div class="cw-grid">
+        <div class="cw-step">
+          <div class="cw-num">1</div>
+          <h4>ข้อความ</h4>
+          <p>สอนเขียน Hook, Caption, Story และ Call to Action ให้สื่อสารชัด ไม่ขายแข็ง และชวนคนสนใจเข้ามาคุยต่อ</p>
+        </div>
+        <div class="cw-step">
+          <div class="cw-num">2</div>
+          <h4>ภาพ</h4>
+          <p>สอนสร้างภาพโปรโมทบริษัท สินค้า กิจกรรม และภาพประกอบโพสต์ให้ดูมืออาชีพตามแนวทางแบรนด์</p>
+        </div>
+        <div class="cw-step">
+          <div class="cw-num">3</div>
+          <h4>วิดีโอ</h4>
+          <p>สอนทำสคริปต์ คลิปสั้น และวิดีโอแนะนำโอกาสธุรกิจ เพื่อใช้ลง Reels, TikTok, Shorts และ LINE OA</p>
+        </div>
+        <div class="cw-step">
+          <div class="cw-num">4</div>
+          <h4>โพสต์ + Sponsor</h4>
+          <p>สอนวางแผนโพสต์ลงช่องทางต่าง ๆ พร้อมแนวทางทำ Sponsor เพื่อเข้าถึงกลุ่มเป้าหมายและติดตามผลใน Innova CRM</p>
+        </div>
       </div>
     </div>
 
@@ -2451,98 +2438,188 @@ const counter=document.getElementById('counter');
 if(counter) counter.textContent='XXX';
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- Sale Page: interactive Metrix Bonus demo ---------- */
-const saleRoot=document.getElementById('saleInteractive');
+/* ---------- Company logo upload ---------- */
+const companyLogoInput=document.getElementById('companyLogoInput');
+const companyLogoImg=document.getElementById('companyLogoImg');
+const logoPlaceholder=document.getElementById('logoPlaceholder');
+const clearLogoBtn=document.getElementById('clearLogoBtn');
+function setCompanyLogo(src){
+  if(!companyLogoImg||!logoPlaceholder)return;
+  if(src){
+    companyLogoImg.src=src;
+    companyLogoImg.style.display='block';
+    logoPlaceholder.style.display='none';
+  }else{
+    companyLogoImg.removeAttribute('src');
+    companyLogoImg.style.display='none';
+    logoPlaceholder.style.display='block';
+  }
+}
+if(companyLogoImg?.getAttribute('src')) setCompanyLogo(companyLogoImg.getAttribute('src'));
+companyLogoInput?.addEventListener('change',e=>{
+  const file=e.target.files?.[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>setCompanyLogo(reader.result);
+  reader.readAsDataURL(file);
+});
+clearLogoBtn?.addEventListener('click',()=>{
+  setCompanyLogo('');
+  if(companyLogoInput) companyLogoInput.value='';
+});
+
+/* ---------- Sale Page: clickable Matrix + Re-Buy motion ---------- */
+const saleRoot=document.getElementById('sale-page');
 if(saleRoot){
-  const saleSlots=[...saleRoot.querySelectorAll('[data-sale-slot]')];
   const saleMemberCount=document.getElementById('saleMemberCount');
   const saleReferralIncome=document.getElementById('saleReferralIncome');
-  const saleAddMemberBtn=document.getElementById('saleAddMemberBtn');
-  const saleAutoBtn=document.getElementById('saleAutoBtn');
-  const saleResetBtn=document.getElementById('saleResetBtn');
-  const saleWithdrawBtn=document.getElementById('saleWithdrawBtn');
-  const saleNarration=document.getElementById('saleNarration');
+  const saleMemberStat=document.getElementById('saleMemberStat');
+  const saleReferralStat=document.getElementById('saleReferralStat');
   const saleBonusBanner=document.getElementById('saleBonusBanner');
   const saleBonusLabel=document.getElementById('saleBonusLabel');
   const saleBonusAmount=document.getElementById('saleBonusAmount');
   const saleWaitingCount=document.getElementById('saleWaitingCount');
+  const saleNarration=document.getElementById('saleNarration');
+  const saleAddMemberBtn=document.getElementById('saleAddMemberBtn');
+  const saleAutoBtn=document.getElementById('saleAutoBtn');
+  const saleResetBtn=document.getElementById('saleResetBtn');
+  const saleWithdrawBtn=document.getElementById('saleWithdrawBtn');
+  const saleSlots=[...saleRoot.querySelectorAll('[data-sale-slot]')];
   const saleRebuySteps=[...saleRoot.querySelectorAll('.sale-rebuy-step')];
   let saleMembers=0;
+  let saleFilled=0;
   let saleAutoTimer=null;
+  let saleSettling=false;
+  let saleRebuyTimers=[];
 
-  function money(n){return '฿'+n.toLocaleString('th-TH');}
-  function setSaleNarration(text){if(saleNarration) saleNarration.textContent=text;}
-  function renderSale(){
-    saleMemberCount.textContent=saleMembers;
-    saleReferralIncome.textContent=money(saleMembers*350);
-    saleSlots.forEach((slot,idx)=>{
-      const filled=idx<saleMembers;
-      slot.classList.toggle('empty',!filled);
-      slot.classList.toggle('is-filled',filled);
-      slot.querySelector('.sale-face').textContent=filled?'🧑':'➕';
-      const status=slot.querySelector('.sale-status');
-      status.textContent=filled?'มีพาร์ทเนอร์แล้ว':'รอพาร์ทเนอร์';
-      status.classList.toggle('waiting',!filled);
-    });
-    saleBonusBanner.classList.toggle('is-complete',saleMembers>=3);
-    saleBonusLabel.textContent=saleMembers>=3?'พร้อมถอนโบนัส':'รอรับโบนัส';
-    saleBonusAmount.textContent=saleMembers>=3?'฿1,500':'฿1,500';
-    saleWaitingCount.innerHTML=saleMembers>=3
-      ? '<b>ครบ 3 คน</b> บริษัทจ่ายโบนัสทันที'
-      : `ยังขาดอีก <b>${3-saleMembers} คน</b> เพื่อรับ Metrix Bonus`;
-    saleRebuySteps.forEach((step,idx)=>step.classList.toggle('is-active',saleMembers>=3 && idx<=Math.min(3,saleMembers)));
-  }
-  function pulse(el){
-    if(!el || reduce) return;
-    el.classList.remove('is-active','is-pop');
+  const baht=n=>'฿'+n.toLocaleString('th-TH');
+  const setSaleText=msg=>{saleNarration.textContent=msg;};
+  const bump=el=>{
+    if(!el)return;
+    el.classList.remove('is-pop');
     void el.offsetWidth;
-    el.classList.add(el.classList.contains('sale-bonus-amount')?'is-pop':'is-active');
+    el.classList.add('is-pop');
+    setTimeout(()=>el.classList.remove('is-pop'),520);
+  };
+
+  function paintSaleSlots(active=-1){
+    saleSlots.forEach((slot,i)=>{
+      const filled=i<saleFilled;
+      slot.classList.toggle('is-filled',filled);
+      slot.classList.toggle('empty',!filled);
+      slot.classList.toggle('is-active',i===active);
+      const face=slot.querySelector('.sale-face');
+      const status=slot.querySelector('.sale-status');
+      if(face) face.textContent=filled?'🧑':'➕';
+      if(status){
+        status.textContent=filled?'มีสมาชิกแล้ว':'รอสมาชิก';
+        status.classList.toggle('waiting',!filled);
+      }
+    });
   }
-  function addSaleMember(){
-    if(saleMembers>=3){
-      saleMembers=0;
-      renderSale();
-      setSaleNarration('เริ่มรอบใหม่: เติมพาร์ทเนอร์ธุรกิจเข้าแผนโบนัสอีกครั้ง');
-      return;
+
+  function clearSaleRebuyMotion(){
+    saleRebuyTimers.forEach(clearTimeout);
+    saleRebuyTimers=[];
+    saleRebuySteps.forEach(step=>step.classList.remove('is-active'));
+  }
+
+  function resetSaleCycle(options={}){
+    saleSettling=false;
+    saleFilled=0;
+    clearSaleRebuyMotion();
+    saleBonusBanner.classList.remove('is-complete');
+    saleBonusLabel.textContent='รอรับโบนัส';
+    saleBonusAmount.classList.remove('is-pop');
+    saleReferralIncome.textContent=baht(0);
+    paintSaleSlots();
+    if(!options.keepMessage) setSaleText('กดเพิ่มสมาชิก หรือกดที่ช่อง Matrix เพื่อจำลองการไหลของโบนัส');
+  }
+
+  function completeSaleCycle(){
+    saleSettling=true;
+    saleBonusLabel.textContent='รับโบนัสแล้ว';
+    saleBonusBanner.classList.add('is-complete');
+    saleBonusAmount.classList.add('is-pop');
+    setSaleText('ครบ 3 ช่องแล้ว → รับโบนัส ฿1,500 และเริ่มวงจร Re-Buy');
+    clearSaleRebuyMotion();
+    saleRebuySteps.forEach((step,i)=>{
+      saleRebuyTimers.push(setTimeout(()=>step.classList.add('is-active'),260+i*320));
+    });
+    saleRebuyTimers.push(setTimeout(()=>{
+      resetSaleCycle({keepMessage:true});
+      setSaleText('Re-Buy ตั้งรอบใหม่แล้ว → รอสมาชิกชุดถัดไปเข้าช่อง Matrix');
+    },2050));
+  }
+
+  function addSaleMember(source='click'){
+    if(saleSettling)return;
+    if(saleFilled>=3){
+      resetSaleCycle({keepMessage:true});
     }
     saleMembers+=1;
-    renderSale();
-    pulse(saleSlots[saleMembers-1]);
-    pulse(saleBonusAmount);
-    const income=saleMembers*350;
-    if(saleMembers<3){
-      setSaleNarration(`พาร์ทเนอร์ธุรกิจคนที่ ${saleMembers} เข้าแผนแล้ว ค่าแนะนำสะสม ${money(income)} ยังขาดอีก ${3-saleMembers} คน`);
-    }else{
-      setSaleNarration('ครบ 3 คนแล้ว: ระบบปลดล็อก Metrix Bonus 1,500 บาท และวน Re-Buy เพื่อรับโบนัสเพิ่ม 500');
-    }
+    saleFilled+=1;
+    const active=saleFilled-1;
+    saleMemberCount.textContent=saleMembers.toLocaleString('th-TH');
+    saleReferralIncome.textContent=baht(saleFilled*500);
+    saleWaitingCount.textContent=(217+saleMembers).toLocaleString('th-TH')+' คน';
+    saleBonusLabel.textContent=saleFilled<3?'รอรับโบนัส':'กำลังจ่ายโบนัส';
+    saleBonusBanner.classList.remove('is-complete');
+    paintSaleSlots(active);
+    bump(saleMemberStat);
+    bump(saleReferralStat);
+    setSaleText(`สมาชิกคนที่ ${saleMembers.toLocaleString('th-TH')} เข้าระบบ → เติมช่องที่ ${saleFilled}/3 และสะสมค่าแนะนำ ${baht(saleFilled*500)}`);
+    if(saleFilled===3) completeSaleCycle();
   }
-  function resetSale(){
-    saleMembers=0;
-    stopSaleAuto();
-    renderSale();
-    setSaleNarration('กดเพิ่มพาร์ทเนอร์ธุรกิจ เพื่อดูการเคลื่อนไหวของรายได้ ค่าแนะนำ และ Metrix Bonus');
-  }
+
   function stopSaleAuto(){
     if(saleAutoTimer) clearInterval(saleAutoTimer);
     saleAutoTimer=null;
-    if(saleAutoBtn) saleAutoBtn.textContent='เล่นอัตโนมัติ';
+    saleAutoBtn.textContent='▶ เล่นอัตโนมัติ';
   }
+
   function startSaleAuto(){
-    stopSaleAuto();
-    saleAutoBtn.textContent='หยุดเล่น';
-    saleAutoTimer=setInterval(addSaleMember,1400);
+    if(saleAutoTimer)return;
+    saleAutoBtn.textContent='⏸ หยุด';
+    addSaleMember('auto');
+    saleAutoTimer=setInterval(()=>addSaleMember('auto'),1450);
   }
-  saleAddMemberBtn?.addEventListener('click',addSaleMember);
-  saleResetBtn?.addEventListener('click',resetSale);
-  saleAutoBtn?.addEventListener('click',()=>saleAutoTimer?stopSaleAuto():startSaleAuto());
-  saleWithdrawBtn?.addEventListener('click',()=>{
-    setSaleNarration(saleMembers>=3
-      ? 'ถอนรายได้ได้ทันทีเมื่อเข้าเงื่อนไขครบ ระบบแสดงยอดโบนัสและรอบ Re-Buy ชัดเจนในหน้าเดียว'
-      : 'ปุ่มถอนรายได้พร้อมใช้งาน เมื่อพาร์ทเนอร์ธุรกิจเข้าเงื่อนไขครบตามแผนโบนัส');
-    pulse(saleWithdrawBtn);
+
+  function toggleSaleAuto(){
+    if(saleAutoTimer) stopSaleAuto();
+    else startSaleAuto();
+  }
+
+  function withdrawSaleBonus(){
+    saleWithdrawBtn.classList.add('is-active');
+    setTimeout(()=>saleWithdrawBtn.classList.remove('is-active'),480);
+    if(saleFilled===3||saleSettling){
+      setSaleText('ถอนรายได้สำเร็จ → ระบบบันทึกยอดและเริ่ม Re-Buy รอบถัดไป');
+    }else{
+      setSaleText(`ยังขาดอีก ${3-saleFilled} ช่อง ก่อนถอนโบนัส Matrix รอบนี้`);
+    }
+  }
+
+  saleAddMemberBtn?.addEventListener('click',()=>addSaleMember());
+  saleAutoBtn?.addEventListener('click',toggleSaleAuto);
+  saleResetBtn?.addEventListener('click',()=>{
+    stopSaleAuto();
+    saleMembers=0;
+    saleMemberCount.textContent='0';
+    resetSaleCycle();
   });
-  renderSale();
-  if(!reduce) setTimeout(startSaleAuto,800);
+  saleWithdrawBtn?.addEventListener('click',withdrawSaleBonus);
+  saleWithdrawBtn?.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();withdrawSaleBonus();}
+  });
+  saleSlots.forEach(slot=>{
+    slot.addEventListener('click',()=>addSaleMember());
+    slot.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();addSaleMember();}
+    });
+  });
+  resetSaleCycle();
+  if(!reduce) setTimeout(startSaleAuto,650);
 }
 
 /* ---------- 4 Regions: 77-province checklist ---------- */
