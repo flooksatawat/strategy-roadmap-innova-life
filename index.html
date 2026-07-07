@@ -789,8 +789,10 @@ section{padding:64px 0}
   display:flex;align-items:center;justify-content:center;gap:12px;text-align:left;
   background:#076044;color:#fff;border-radius:14px;padding:18px 22px;
   box-shadow:0 4px 12px rgba(6,96,68,.24);
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;
 }
+.sale-withdraw:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(6,96,68,.28)}
+.sale-withdraw:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .sale-withdraw::after{
   content:"";position:absolute;inset:0 auto 0 -70%;width:55%;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.2),transparent);
@@ -807,6 +809,19 @@ section{padding:64px 0}
   animation:saleAvatarPulse 2.8s ease-in-out infinite;
 }
 .sale-avatar-caption{color:#5B6B80;font-size:.95rem}
+.sale-demo-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.sale-demo-btn{
+  border:1px solid rgba(14,131,199,.25);border-radius:999px;padding:10px 16px;
+  font-family:'Chakra Petch',sans-serif;font-weight:700;background:#fff;color:#0B83C7;
+  cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.sale-demo-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,131,199,.16)}
+.sale-demo-btn.primary{background:linear-gradient(135deg,#0EA5E9,#35D399);color:#fff;border-color:transparent}
+.sale-demo-btn.ghost{background:transparent;color:#5B6B80}
+.sale-narration{
+  margin-top:12px;background:#F0F9FF;border:1px solid rgba(14,165,233,.18);
+  border-radius:12px;padding:12px 14px;color:#456275;font-size:.9rem;line-height:1.55
+}
 .sale-matrix-title{text-align:center;color:var(--deep);font-size:1.05rem;margin-bottom:24px}
 .sale-matrix-title b{font-family:'Chakra Petch',sans-serif;color:var(--deep)}
 .sale-matrix-title .bonus{color:#F0A63C;font-weight:800}
@@ -847,6 +862,7 @@ section{padding:64px 0}
   background:linear-gradient(135deg,#263E59,#66C9EE);color:#fff;border:1.5px solid rgba(240,166,60,.65);
   border-radius:18px;padding:24px;margin-bottom:24px;
 }
+.sale-bonus-banner.is-complete{background:linear-gradient(135deg,#065F46,#42C9A0);box-shadow:0 16px 32px rgba(6,95,70,.2)}
 .sale-live-dot{width:9px;height:9px;border-radius:50%;background:#45E6A4;box-shadow:0 0 0 5px rgba(69,230,164,.18)}
 .sale-bonus-label{font-size:1.15rem;font-weight:800}
 .sale-bonus-amount{font-family:'Chakra Petch',sans-serif;font-size:2.4rem;font-weight:800;color:#FDE047}
@@ -968,9 +984,55 @@ section{padding:64px 0}
 }
 .audit-card:nth-child(2n){border-left-color:var(--jade)}
 .audit-card:nth-child(3n){border-left-color:var(--gold)}
-.audit-card h4{font-size:1rem;color:var(--deep);margin-bottom:8px}
+.audit-card h3,.audit-card h4{font-size:1rem;color:var(--deep);margin-bottom:8px}
 .audit-card p{font-size:.9rem;color:var(--muted);line-height:1.58}
 .audit-card b{color:var(--deep)}
+.site-label{font-weight:700;color:var(--deep)}
+
+/* ---------- INVITE KEYWORDS ---------- */
+.invite-sec{background:linear-gradient(180deg,var(--paper) 0%,#EFF9F3 100%)}
+.invite-panel{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;box-shadow:0 16px 35px rgba(15,59,92,.07)
+}
+.invite-hero{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
+  gap:22px;align-items:stretch;margin-bottom:22px
+}
+.invite-main{
+  background:linear-gradient(135deg,#0F3B5C,#166A61);
+  color:#fff;border-radius:18px;padding:24px
+}
+.invite-main h3{
+  font-size:clamp(1.4rem,3vw,2.35rem);line-height:1.15;margin-bottom:10px;
+  color:#fff
+}
+.invite-main p{color:#DDF7EC;line-height:1.65;font-size:1rem}
+.invite-commission{
+  border:2px solid var(--gold);border-radius:18px;padding:22px;
+  background:linear-gradient(135deg,#FFF7E8,#FFFFFF)
+}
+.invite-commission .big{font-family:'Chakra Petch',sans-serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1}
+.invite-commission p{color:var(--muted);line-height:1.55;margin-top:10px}
+.invite-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.invite-card{
+  background:#F8FBFF;border:1px solid var(--line);border-radius:14px;padding:18px;
+  min-height:140px
+}
+.invite-card b{display:block;color:var(--deep);font-size:1.02rem;margin-bottom:8px}
+.invite-card p{color:var(--muted);font-size:.92rem;line-height:1.58}
+.invite-card.gold{background:#FFF8EA;border-color:#F4CF92}
+.invite-card.jade{background:#EFFFF6;border-color:#9EE4C3}
+.invite-script{
+  margin-top:18px;background:#0F3B5C;color:#fff;border-radius:16px;padding:18px 20px;
+  display:flex;gap:14px;align-items:flex-start
+}
+.invite-script span{font-size:1.35rem}
+.invite-script p{line-height:1.65;color:#EAF6FF}
+@media(max-width:860px){
+  .invite-hero,.invite-grid{grid-template-columns:1fr}
+  .invite-main,.invite-commission{padding:20px}
+}
 .audit-note{
   margin-top:18px;padding:16px 18px;background:var(--gold-soft);
   border:1px solid rgba(240,166,60,.55);border-radius:14px;color:#7A4C05;font-size:.9rem;
@@ -1192,7 +1254,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
     </ul>
     <div class="key-message">
       <span class="km-label">เพราะเราเชื่อว่า</span>
-      <div class="km-text">💰 รายได้ในกระเป๋า <span class="km-eq">=</span> 📖 ความรู้เท่าเรามี</div>
+      <div class="km-text">💰 รายได้ในกระเป๋า <span class="km-eq">=</span> 📖 ความรู้ที่เรามี</div>
     </div>
     <div class="model-shift">
       <div class="shift-col old">
@@ -1257,7 +1319,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
   <div class="wrap">
     <div class="eyebrow">Business Engine</div>
     <h2 class="sec-title">3 แกนหลักขับเคลื่อนธุรกิจ</h2>
-    <p class="sec-sub">โมเดลธุรกิจแบบแพลตฟอร์ม — บริษัทไม่มีสินค้าเอง แต่เชื่อมผู้ประกอบการกับสมาชิกเข้าด้วยกัน ทุกฝ่ายได้ประโยชน์ · กดที่มุมสามเหลี่ยมหรือการ์ดเพื่อดูรายละเอียด</p>
+    <p class="sec-sub">โมเดลธุรกิจแบบแพลตฟอร์ม — บริษัทไม่มีสินค้าเอง แต่เชื่อมผู้ประกอบการกับพาร์ทเนอร์ธุรกิจเข้าด้วยกัน ทุกฝ่ายได้ประโยชน์ · กดที่มุมสามเหลี่ยมหรือการ์ดเพื่อดูรายละเอียด</p>
 
     <div class="engine-layout">
       <div class="tri-wrap">
@@ -1277,10 +1339,10 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             <text x="60" y="285" text-anchor="middle" class="tn-icon">📦</text>
             <text x="60" y="310" text-anchor="middle" class="tn-label">สินค้า</text>
           </g>
-          <g class="tri-node" data-axis="2" tabindex="0" role="button" aria-label="สมาชิก แนะนำบอกต่อ">
+          <g class="tri-node" data-axis="2" tabindex="0" role="button" aria-label="พาร์ทเนอร์ธุรกิจ แนะนำบอกต่อ">
             <circle cx="340" cy="290" r="42"/>
             <text x="340" y="285" text-anchor="middle" class="tn-icon">👥</text>
-            <text x="340" y="310" text-anchor="middle" class="tn-label">สมาชิก</text>
+            <text x="340" y="310" text-anchor="middle" class="tn-label">พาร์ทเนอร์</text>
           </g>
           <text x="200" y="205" text-anchor="middle" class="tri-center">คุณค่าหมุนเวียน<tspan x="200" dy="22">ทุกฝ่ายได้ประโยชน์</tspan></text>
         </svg>
@@ -1302,7 +1364,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           <span class="ax-num">2</span>
           <div>
             <h3>📦 สินค้า — จากผู้ประกอบการ ไม่มีสินค้าเอง</h3>
-            <p>บริษัทไม่ผลิตและไม่สต๊อกสินค้าเอง แต่คัดสรรสินค้าและบริการที่ดีจากผู้ประกอบการตัวจริง — ผู้ประกอบการได้ช่องทางเข้าถึงลูกค้า สมาชิกได้ของดีมีคุณภาพ Win-Win ทุกฝ่าย</p>
+            <p>บริษัทไม่ผลิตและไม่สต๊อกสินค้าเอง แต่คัดสรรสินค้าและบริการที่ดีจากผู้ประกอบการตัวจริง — ผู้ประกอบการได้ช่องทางเข้าถึงลูกค้า พาร์ทเนอร์ธุรกิจได้ของดีมีคุณภาพ Win-Win ทุกฝ่าย</p>
             <ul class="ax-sub">
               <li>💻 รองรับ <b>ดิจิทัลโปรดักต์</b> — สอนวิธีสร้างสินค้าดิจิทัล (คอร์สเรียน, เทมเพลต, เครื่องมือดิจิทัล) แล้วนำมาวางขายบนแพลตฟอร์มได้จริง</li>
               <li>🎓 สอนสร้างสินค้าดิจิทัลเฉพาะทาง: <b>E-Book · E-Learning · Software</b> ตั้งแต่ไอเดียจนถึงพร้อมขายจริง</li>
@@ -1315,7 +1377,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
         <button class="axis-card" data-axis="2" type="button">
           <span class="ax-num">3</span>
           <div>
-            <h3>👥 สมาชิก — แนะนำบอกต่อ เชื่อมต่อคน</h3>
+            <h3>👥 พาร์ทเนอร์ธุรกิจ — แนะนำบอกต่อ เชื่อมต่อคน</h3>
             <p>ไม่ต้องสต๊อกของ ไม่ต้องขายแบบกดดัน แค่แนะนำสิ่งดีๆ ให้คนที่ใช่ และเชื่อมต่อคนเข้าหากัน — ทุกการบอกต่อคือการสร้างคุณค่า และสร้างรายได้ที่ยั่งยืน</p>
           </div>
         </button>
@@ -1399,7 +1461,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             <div class="ff-rule"><b>1. จ่ายตัวเองก่อน</b> — หักเงินออม/ลงทุนทันทีที่รายได้เข้า อย่ารอ "เหลือแล้วค่อยออม"</div>
             <div class="ff-rule"><b>2. แยกบัญชีให้ชัด</b> — เงินแต่ละก้อนอยู่คนละที่ ไม่ปะปนกัน ควบคุมง่าย เห็นภาพจริง</div>
             <div class="ff-rule"><b>3. จ่ายสิ่งจำเป็นก่อนสิ่งอยากได้</b> — ที่อยู่ อาหาร หนี้ ต้องมาก่อนความบันเทิง</div>
-            <div class="ff-rule"><b>4. ลงทุนในตัวเองเสมอ</b> — แบ่งส่วนหนึ่งซื้อความรู้และทักษะ เพราะรายได้ในกระเป๋า = ความรู้เท่าเรามี</div>
+            <div class="ff-rule"><b>4. ลงทุนในตัวเองเสมอ</b> — แบ่งส่วนหนึ่งซื้อความรู้และทักษะ เพราะรายได้ในกระเป๋า = ความรู้ที่เรามี</div>
           </div>
         </div>
       </div>
@@ -1450,6 +1512,34 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="pillar-add">
+      <button class="add-topic-btn" id="btnAddTopic" type="button">+ เพิ่มหัวข้อใหม่</button>
+      <form class="topic-form" id="topicForm" hidden>
+        <div class="tf-grid">
+          <div class="tf-field">
+            <label for="topicTitle">หัวข้อ</label>
+            <input id="topicTitle" type="text" placeholder="เช่น ระบบอบรมพาร์ทเนอร์ใหม่">
+          </div>
+          <div class="tf-field">
+            <label for="topicBadge">ป้ายกำกับ</label>
+            <input id="topicBadge" type="text" placeholder="เช่น ใช้งานได้ทันที">
+          </div>
+          <div class="tf-field full">
+            <label for="topicDesc">คำอธิบาย</label>
+            <textarea id="topicDesc" placeholder="สรุปแนวคิดของหัวข้อนี้"></textarea>
+          </div>
+          <div class="tf-field full">
+            <label for="topicBullets">รายการย่อย</label>
+            <textarea id="topicBullets" placeholder="ใส่ทีละบรรทัด เช่น&#10;ขั้นตอนที่ 1&#10;ขั้นตอนที่ 2"></textarea>
+          </div>
+        </div>
+        <div class="tf-actions">
+          <button class="tf-cancel" id="topicCancel" type="button">ยกเลิก</button>
+          <button class="tf-save" type="submit">บันทึกและสร้างหัวข้อใหม่</button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -1585,74 +1675,134 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
 <section class="sale-page-sec" id="sale-page" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow">Sale Page System</div>
-    <h2 class="sec-title">Sale Page — สมัคร แนะนำ ถอนรายได้ และ Re-Buy ในหน้าเดียว</h2>
-    <p class="sec-sub">ส่วนนี้เขียนโค้ดฝังไว้ในระบบโดยตรง เพื่อแสดงประสบการณ์ Sale Page ที่สมาชิกเห็น ไม่ใช่การแปะลิงก์ออกไปภายนอก</p>
+    <h2 class="sec-title">Sale Page — สมัครพาร์ทเนอร์ธุรกิจ แนะนำ ถอนรายได้ และ Re-Buy ในหน้าเดียว</h2>
+    <p class="sec-sub">ส่วนนี้เขียนโค้ดฝังไว้ในระบบโดยตรง เพื่อแสดงประสบการณ์ Sale Page ที่พาร์ทเนอร์ธุรกิจเห็น ไม่ใช่การแปะลิงก์ออกไปภายนอก</p>
 
-    <div class="sale-demo-shell">
+    <div class="sale-demo-shell" id="saleInteractive">
       <div class="sale-overview-card">
         <div class="sale-overview-top">
-          <div class="sale-mini-stat">
-            <small>สมาชิก</small>
-            <b>0</b>
+          <div class="sale-mini-stat" id="saleMemberStat">
+            <small>พาร์ทเนอร์ธุรกิจ</small>
+            <b id="saleMemberCount">0</b>
           </div>
-          <div class="sale-mini-stat">
+          <div class="sale-mini-stat" id="saleReferralStat">
             <small>ค่าแนะนำ</small>
-            <b>฿0</b>
+            <b id="saleReferralIncome">฿0</b>
           </div>
-          <div class="sale-withdraw">
+          <button class="sale-withdraw" id="saleWithdrawBtn" type="button">
             <span class="sale-withdraw-icon">💳</span>
             <div>
               <strong>กดถอนรายได้ได้ทันที</strong>
               <small>รับเงินเข้าบัญชีวันถัดไป</small>
             </div>
-          </div>
+          </button>
         </div>
         <div class="sale-avatar-row">
           <div class="sale-avatar">👤</div>
-          <div class="sale-avatar-caption">ภาพรวมหน้า Sale Page สำหรับสมาชิกใหม่: เห็นจำนวนสมาชิก ค่าแนะนำ และปุ่มถอนรายได้ในแผงเดียว</div>
+          <div class="sale-avatar-caption">ภาพรวมหน้า Sale Page สำหรับพาร์ทเนอร์ธุรกิจใหม่: เห็นจำนวนพาร์ทเนอร์ธุรกิจ ค่าแนะนำ และปุ่มถอนรายได้ในแผงเดียว</div>
         </div>
+        <div class="sale-demo-actions">
+          <button class="sale-demo-btn primary" id="saleAddMemberBtn" type="button">+ เพิ่มพาร์ทเนอร์</button>
+          <button class="sale-demo-btn" id="saleAutoBtn" type="button">เล่นอัตโนมัติ</button>
+          <button class="sale-demo-btn ghost" id="saleResetBtn" type="button">เริ่มใหม่</button>
+        </div>
+        <p class="sale-narration" id="saleNarration">กดเพิ่มพาร์ทเนอร์ธุรกิจ เพื่อดูการเคลื่อนไหวของรายได้ ค่าแนะนำ และ Metrix Bonus</p>
       </div>
 
       <div class="sale-matrix-card">
-        <div class="sale-matrix-title"><b>Matrix Bonus</b> ครบ 3 ช่อง รับโบนัสทันที <span class="bonus">฿1,500</span></div>
+        <div class="sale-matrix-title"><b>Metrix Bonus</b> ครบ 3 ช่อง รับโบนัสทันที <span class="bonus">฿1,500</span></div>
         <div class="sale-matrix-row">
           <div class="sale-slot you">
             <span class="sale-face">🧑</span>
             <span class="sale-label">คุณ</span>
           </div>
           <div class="sale-plus">+</div>
-          <div class="sale-slot">
-            <span class="sale-face">🧑</span>
+          <div class="sale-slot empty" data-sale-slot="0">
+            <span class="sale-face">➕</span>
             <span class="sale-label">ช่องที่ 1</span>
-            <span class="sale-status">มีสมาชิกแล้ว</span>
+            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
           </div>
-          <div class="sale-slot">
-            <span class="sale-face">🧑</span>
+          <div class="sale-slot empty" data-sale-slot="1">
+            <span class="sale-face">➕</span>
             <span class="sale-label">ช่องที่ 2</span>
-            <span class="sale-status">มีสมาชิกแล้ว</span>
+            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
           </div>
-          <div class="sale-slot empty">
+          <div class="sale-slot empty" data-sale-slot="2">
             <span class="sale-face">➕</span>
             <span class="sale-label">ช่องที่ 3</span>
-            <span class="sale-status waiting">รอสมาชิก</span>
+            <span class="sale-status waiting">รอพาร์ทเนอร์</span>
           </div>
         </div>
-        <div class="sale-bonus-banner">
+        <div class="sale-bonus-banner" id="saleBonusBanner">
           <span class="sale-live-dot"></span>
-          <span class="sale-bonus-label">รอรับโบนัส</span>
-          <span class="sale-bonus-amount">฿1,500</span>
-          <span class="sale-wait">มีสมาชิกรอรับแล้ว <b>217 คน</b></span>
+          <span class="sale-bonus-label" id="saleBonusLabel">รอรับโบนัส</span>
+          <span class="sale-bonus-amount" id="saleBonusAmount">฿1,500</span>
+          <span class="sale-wait" id="saleWaitingCount">มีพาร์ทเนอร์รอรับแล้ว <b>217 คน</b></span>
         </div>
         <div class="sale-rebuy">
           <h3>♻️ ระบบ Re-Buy หมุนเวียนรายได้</h3>
           <div class="sale-rebuy-steps">
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">1</span>รับโบนัส 1,500</div>
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">2</span>ซื้อสินค้าซ้ำ 1,000</div>
-            <div class="sale-rebuy-step"><span class="sale-rebuy-num">3</span>รักษาสถานะสมาชิก</div>
+            <div class="sale-rebuy-step"><span class="sale-rebuy-num">3</span>รักษาสถานะพาร์ทเนอร์</div>
             <div class="sale-rebuy-step"><span class="sale-rebuy-num">4</span>500 สะสมถอนได้</div>
           </div>
-          <p class="sale-rebuy-note">วงจรหมุนต่อเนื่อง — ทุกครั้งที่เกิดใหม่ ทั้งสายงานได้รับรายได้ซ้ำ</p>
+          <p class="sale-rebuy-note">วงจรหมุนต่อเนื่อง — ทุกครั้งที่เกิดพาร์ทเนอร์ธุรกิจใหม่ ทั้งสายงานได้รับรายได้ซ้ำ</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INVITE KEYWORDS ================= -->
+<section class="invite-sec" id="invite-keywords" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Invite Keywords</div>
+    <h2 class="sec-title">คีย์เวิร์ดในการชวน — ซื้อสินค้าแล้วมีสิทธิสร้างรายได้</h2>
+    <p class="sec-sub">จัดข้อความให้พาร์ทเนอร์ธุรกิจใช้สื่อสารได้ตรง เข้าใจง่าย และไม่ต้องอธิบายซับซ้อน</p>
+
+    <div class="invite-panel">
+      <div class="invite-hero">
+        <div class="invite-main">
+          <h3>ซื้อสินค้า 1,000 บาท<br>ได้รับสิทธิสร้างรายได้</h3>
+          <p>จากการแนะนำ / บอกต่อ เหมือน Affiliate, นายหน้า หรือปักตะกร้า ไม่ต้องลงทุนเพิ่ม ไม่ต้องสต๊อกสินค้า และใช้ Sale Page เป็นเครื่องมือช่วยปิดการสมัคร</p>
+        </div>
+        <div class="invite-commission">
+          <div class="big">350 บาท</div>
+          <p><b>บริษัทจ่าย 350 บาท / คน หรือ 35%</b><br>เมื่อแนะนำพาร์ทเนอร์ธุรกิจใหม่ที่ซื้อสินค้าเข้าเงื่อนไข</p>
+        </div>
+      </div>
+
+      <div class="invite-grid">
+        <div class="invite-card">
+          <b>แนะนำครบ 10 คน</b>
+          <p>ได้รับสิทธิพิเศษเป็น <b>Partner VVIP กับ Innova Life</b> และได้ส่วนแบ่ง 1% จากยอดขายทั่วโลก</p>
+        </div>
+        <div class="invite-card jade">
+          <b>รายได้จากการบอกต่อของทีม</b>
+          <p>ทุกการบอกต่อของพาร์ทเนอร์ธุรกิจใหม่ เราจะได้รับรายได้ 1% ของพาร์ทเนอร์ธุรกิจทั้งหมดด้วย</p>
+        </div>
+        <div class="invite-card gold">
+          <b>Metrix Bonus</b>
+          <p>เมื่อมีพาร์ทเนอร์ธุรกิจในแผนโบนัสครบ 3 คน บริษัทจ่ายโบนัสให้ผู้ที่เข้าเงื่อนไขทันที</p>
+        </div>
+        <div class="invite-card">
+          <b>โบนัส + สิทธิซื้อซ้ำ</b>
+          <p>เมื่อเข้ามาเป็นพาร์ทเนอร์ธุรกิจ จะได้รับโบนัสจากบริษัทเมื่อมีพาร์ทเนอร์ธุรกิจมากขึ้น และได้รับสิทธิซื้อสินค้าซ้ำ</p>
+        </div>
+        <div class="invite-card jade">
+          <b>ไม่ต้องสต๊อกสินค้า</b>
+          <p>ไม่ต้องลงทุนเพิ่ม ไม่ต้องเก็บสินค้าเอง ใช้ระบบบริษัทและคอนเทนต์ AI ช่วยสื่อสารแทน</p>
+        </div>
+        <div class="invite-card gold">
+          <b>โบนัสเพิ่ม 500</b>
+          <p>หลังซื้อสินค้าซ้ำ 1,000 บาทในระบบ Re-Buy จะเหลือ 500 บาทสะสมถอนได้ตามเงื่อนไข</p>
+        </div>
+      </div>
+
+      <div class="invite-script">
+        <span>💬</span>
+        <p><b>ประโยคชวนสั้น:</b> ซื้อสินค้า 1,000 บาท แล้วได้สิทธิสร้างรายได้จากการแนะนำ เหมือน Affiliate / นายหน้า / ปักตะกร้า บริษัทจ่าย 350 บาทต่อคน และถ้าขยายครบตามเงื่อนไขยังมี Metrix Bonus กับสิทธิ Partner VVIP เพิ่มอีก</p>
       </div>
     </div>
   </div>
@@ -1738,7 +1888,7 @@ body.editing .kpi,body.editing .pillar-panel,body.editing .phase-detail{
             </div>
           </div>
         </div>
-        <div class="shelf-note">แนวทางใหม่: ลดความหนาแน่นของกริดเดิม เพิ่มตัวกรอง หมวดสินค้า และการ์ดที่อ่านง่ายขึ้น เพื่อช่วยให้สมาชิกเลือกสินค้าได้เร็วขึ้น</div>
+        <div class="shelf-note">แนวทางใหม่: ลดความหนาแน่นของกริดเดิม เพิ่มตัวกรอง หมวดสินค้า และการ์ดที่อ่านง่ายขึ้น เพื่อช่วยให้พาร์ทเนอร์ธุรกิจเลือกสินค้าได้เร็วขึ้น</div>
       </div>
     </div>
   </div>
@@ -2300,6 +2450,100 @@ renderPhase(0);
 const counter=document.getElementById('counter');
 if(counter) counter.textContent='XXX';
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Sale Page: interactive Metrix Bonus demo ---------- */
+const saleRoot=document.getElementById('saleInteractive');
+if(saleRoot){
+  const saleSlots=[...saleRoot.querySelectorAll('[data-sale-slot]')];
+  const saleMemberCount=document.getElementById('saleMemberCount');
+  const saleReferralIncome=document.getElementById('saleReferralIncome');
+  const saleAddMemberBtn=document.getElementById('saleAddMemberBtn');
+  const saleAutoBtn=document.getElementById('saleAutoBtn');
+  const saleResetBtn=document.getElementById('saleResetBtn');
+  const saleWithdrawBtn=document.getElementById('saleWithdrawBtn');
+  const saleNarration=document.getElementById('saleNarration');
+  const saleBonusBanner=document.getElementById('saleBonusBanner');
+  const saleBonusLabel=document.getElementById('saleBonusLabel');
+  const saleBonusAmount=document.getElementById('saleBonusAmount');
+  const saleWaitingCount=document.getElementById('saleWaitingCount');
+  const saleRebuySteps=[...saleRoot.querySelectorAll('.sale-rebuy-step')];
+  let saleMembers=0;
+  let saleAutoTimer=null;
+
+  function money(n){return '฿'+n.toLocaleString('th-TH');}
+  function setSaleNarration(text){if(saleNarration) saleNarration.textContent=text;}
+  function renderSale(){
+    saleMemberCount.textContent=saleMembers;
+    saleReferralIncome.textContent=money(saleMembers*350);
+    saleSlots.forEach((slot,idx)=>{
+      const filled=idx<saleMembers;
+      slot.classList.toggle('empty',!filled);
+      slot.classList.toggle('is-filled',filled);
+      slot.querySelector('.sale-face').textContent=filled?'🧑':'➕';
+      const status=slot.querySelector('.sale-status');
+      status.textContent=filled?'มีพาร์ทเนอร์แล้ว':'รอพาร์ทเนอร์';
+      status.classList.toggle('waiting',!filled);
+    });
+    saleBonusBanner.classList.toggle('is-complete',saleMembers>=3);
+    saleBonusLabel.textContent=saleMembers>=3?'พร้อมถอนโบนัส':'รอรับโบนัส';
+    saleBonusAmount.textContent=saleMembers>=3?'฿1,500':'฿1,500';
+    saleWaitingCount.innerHTML=saleMembers>=3
+      ? '<b>ครบ 3 คน</b> บริษัทจ่ายโบนัสทันที'
+      : `ยังขาดอีก <b>${3-saleMembers} คน</b> เพื่อรับ Metrix Bonus`;
+    saleRebuySteps.forEach((step,idx)=>step.classList.toggle('is-active',saleMembers>=3 && idx<=Math.min(3,saleMembers)));
+  }
+  function pulse(el){
+    if(!el || reduce) return;
+    el.classList.remove('is-active','is-pop');
+    void el.offsetWidth;
+    el.classList.add(el.classList.contains('sale-bonus-amount')?'is-pop':'is-active');
+  }
+  function addSaleMember(){
+    if(saleMembers>=3){
+      saleMembers=0;
+      renderSale();
+      setSaleNarration('เริ่มรอบใหม่: เติมพาร์ทเนอร์ธุรกิจเข้าแผนโบนัสอีกครั้ง');
+      return;
+    }
+    saleMembers+=1;
+    renderSale();
+    pulse(saleSlots[saleMembers-1]);
+    pulse(saleBonusAmount);
+    const income=saleMembers*350;
+    if(saleMembers<3){
+      setSaleNarration(`พาร์ทเนอร์ธุรกิจคนที่ ${saleMembers} เข้าแผนแล้ว ค่าแนะนำสะสม ${money(income)} ยังขาดอีก ${3-saleMembers} คน`);
+    }else{
+      setSaleNarration('ครบ 3 คนแล้ว: ระบบปลดล็อก Metrix Bonus 1,500 บาท และวน Re-Buy เพื่อรับโบนัสเพิ่ม 500');
+    }
+  }
+  function resetSale(){
+    saleMembers=0;
+    stopSaleAuto();
+    renderSale();
+    setSaleNarration('กดเพิ่มพาร์ทเนอร์ธุรกิจ เพื่อดูการเคลื่อนไหวของรายได้ ค่าแนะนำ และ Metrix Bonus');
+  }
+  function stopSaleAuto(){
+    if(saleAutoTimer) clearInterval(saleAutoTimer);
+    saleAutoTimer=null;
+    if(saleAutoBtn) saleAutoBtn.textContent='เล่นอัตโนมัติ';
+  }
+  function startSaleAuto(){
+    stopSaleAuto();
+    saleAutoBtn.textContent='หยุดเล่น';
+    saleAutoTimer=setInterval(addSaleMember,1400);
+  }
+  saleAddMemberBtn?.addEventListener('click',addSaleMember);
+  saleResetBtn?.addEventListener('click',resetSale);
+  saleAutoBtn?.addEventListener('click',()=>saleAutoTimer?stopSaleAuto():startSaleAuto());
+  saleWithdrawBtn?.addEventListener('click',()=>{
+    setSaleNarration(saleMembers>=3
+      ? 'ถอนรายได้ได้ทันทีเมื่อเข้าเงื่อนไขครบ ระบบแสดงยอดโบนัสและรอบ Re-Buy ชัดเจนในหน้าเดียว'
+      : 'ปุ่มถอนรายได้พร้อมใช้งาน เมื่อพาร์ทเนอร์ธุรกิจเข้าเงื่อนไขครบตามแผนโบนัส');
+    pulse(saleWithdrawBtn);
+  });
+  renderSale();
+  if(!reduce) setTimeout(startSaleAuto,800);
+}
 
 /* ---------- 4 Regions: 77-province checklist ---------- */
 const REGIONS=[
